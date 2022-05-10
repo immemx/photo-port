@@ -1,4 +1,4 @@
-// configure the testing enviroment by adding cleanup utility and the describe function
+// __tests__/Nav.test.js with hard coded categories
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -7,33 +7,31 @@ import Nav from '..';
 afterEach(cleanup);
 
 describe('Nav component', () => {
-    // baseline test
-    it('renders', () => {
-        render(<Nav />);
-    });
+  it('renders', () => {
+    render(<Nav />);
+  });
 
-    // snapshot test
-    it('matches snapshot', () => {
-        const { asFragment } = render(<Nav />);
-        //assert value comparison
-        expect(asFragment()).toMatchSnapshot();
-    });
+  it('matches snapshot', () => {
+    const { asFragment } = render(<Nav />);
+
+    expect(asFragment()).toMatchSnapshot();
+  });
 })
 
-describe('emoji is visable', () => {
-    it('inserts emoji into the h2', () => {
-        const { getByLabelText } = render(<Nav />);
-      
-        expect(getByLabelText('camera')).toHaveTextContent('📸');
-    });
+describe('emoji is visible', () => {
+  it('inserts emoji into the h2', () => {
+    const { getByLabelText } = render(<Nav />);
+
+    expect(getByLabelText('camera')).toHaveTextContent('📸');
+  });
 })
 
 describe('links are visible', () => {
-    it('inserts text into the links', () => {
-      // Arrange
-      const{ getByTestId } = render(<Nav/>);
-      expect(getByTestId('link')).toHaveTextContent('Oh Snap!');
+  it('inserts text into the links', () => {
+    const { getByTestId } = render(<Nav />);
+
+    expect(getByTestId('link')).toHaveTextContent('Oh Snap!');
     expect(getByTestId('about')).toHaveTextContent('About me');
-      // Assert
-    });
-  })
+  });
+
+})
